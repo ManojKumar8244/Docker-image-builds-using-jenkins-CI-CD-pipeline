@@ -6,7 +6,7 @@ pipeline{
     // Define tools required for the pipeline
     tools{
         // Use Maven tool configured in Jenkins global tools
-        maven 'mymaven'
+        maven 'maven-3'
     }
 
     stages{
@@ -14,7 +14,7 @@ pipeline{
         stage('clone the repo'){
             steps{
                 // Clone source code from GitHub repository
-                git branch: 'main', url: 'https://github.com/RaviTeja110820/Docker-Image-Build-using-Jenkins-CI-CD.git'
+                git branch: 'main', url: 'https://github.com/ManojKumar8244/Docker-image-builds-using-jenkins-CI-CD-pipeline.git'
             }
         }
 
@@ -44,14 +44,14 @@ pipeline{
 
                     // Login to DockerHub
                     // Password is taken securely from Jenkins credential store
-                    sh 'docker login -u ravteja -p ${DOCKERHUB_PASSWORD}'
+                    sh 'docker login -u nagamano -p ${DOCKERHUB_PASSWORD}'
                 }
 
                 // Tag image with DockerHub repository name
-                sh 'docker tag mydockerjenkins ravteja/mydockerjenkins'
+                sh 'docker tag mydockerjenkins nagamano/mydockerjenkins'
 
                 // Push image to DockerHub registry
-                sh 'docker push ravteja/mydockerjenkins'
+                sh 'docker push nagamano/mydockerjenkins'
             }
         }
 
@@ -61,7 +61,7 @@ pipeline{
                 // Run the container in detached mode
                 // -d runs container in background
                 // -P maps container ports automatically to host ports
-                sh 'docker run -d -P ravteja/mydockerjenkins'
+                sh 'docker run -d -P nagamano/mydockerjenkins'
             }
         }
 
